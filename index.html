@@ -58,7 +58,7 @@
     </div>
     <div class="stats">
       <div class="stat"><h3>10K+</h3><span>Early Users</span></div>
-      <div class="stat"><h3>zk</h3><span>Verified Privacy</span></div>
+      <div class="stat"><h3>$50M</h3><span>Secured</span></div>
       <div class="stat"><h3>L3</h3><span>Protocol Layer</span></div>
     </div>
   </div>
@@ -66,8 +66,8 @@
 
 <section id="docs" class="page hidden">
   <div style="width:100%;max-width:1500px">
-    <article style="width:100%;background:rgba(5,15,35,.78);backdrop-filter:blur(18px);border-radius:30px;padding:70px;display:grid;grid-template-columns:280px 1fr;gap:64px">
-      <nav style="position:sticky;top:40px">
+    <article style="width:100%;background:rgba(5,15,35,.78);backdrop-filter:blur(18px);border-radius:30px;padding:70px;display:grid;grid-template-columns:300px 1fr;gap:64px;align-items:start">
+      <nav style="position:sticky;top:40px;display:flex;flex-direction:column;gap:10px;min-height:calc(100vh - 120px)">
         <h4 style="margin-bottom:22px;color:#7fdcff">Documentation</h4>
         <a class="doclink" href="#features">Protocol Features</a>
         <a class="doclink" href="#privacy">Privacy Protocol</a>
@@ -114,13 +114,76 @@
 </section>
 
 <script>
-  const hideAll=()=>['landing','docs','survey'].forEach(id=>document.getElementById(id).classList.add('hidden'))
-  const goToSurvey=()=>{hideAll();survey.classList.remove('hidden');scrollTo({top:0,behavior:'smooth'})}
-  const goBack=()=>{hideAll();landing.classList.remove('hidden');scrollTo({top:0,behavior:'smooth'})}
-  const openDocs=()=>{hideAll();docs.classList.remove('hidden');scrollTo({top:0,behavior:'smooth'})}
-  const closeDocs=goBack
-  function handlePlatformChange(){handleBox.classList.remove('show');otherBox.classList.remove('show');platform.value==='Other'?otherBox.classList.add('show'):platform.value&&handleBox.classList.add('show')}
-  document.querySelector('form').addEventListener('submit',e=>{e.preventDefault();alert('Submitted');goBack()})
+  const hideAll = () => {
+    ['landing', 'docs', 'survey'].forEach(id => {
+      document.getElementById(id).classList.add('hidden');
+    });
+  };
+
+  const goToSurvey = () => {
+    hideAll();
+    document.getElementById('survey').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const goBack = () => {
+    hideAll();
+    document.getElementById('landing').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const openDocs = () => {
+    hideAll();
+    document.getElementById('docs').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const closeDocs = () => goBack();
+
+  function handlePlatformChange() {
+    const platform = document.getElementById('platform').value;
+    const handleBox = document.getElementById('handleBox');
+    const otherBox = document.getElementById('otherBox');
+
+    handleBox.classList.remove('show');
+    otherBox.classList.remove('show');
+
+    if (platform === 'Other') {
+      otherBox.classList.add('show');
+    } else if (platform) {
+      handleBox.classList.add('show');
+    }
+  }
+
+  document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.querySelector('input[type="email"]').value;
+    const platform = document.getElementById('platform').value;
+
+    let handle = '';
+    if (platform === 'Other') {
+      handle = `${document.getElementById('otherPlatform').value} : ${document.getElementById('otherHandle').value}`;
+    } else {
+      handle = document.getElementById('handle').value;
+    }
+
+    try {
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, platform, handle })
+      });
+
+      if (!res.ok) throw new Error('Submit failed');
+
+      alert('Submitted successfully');
+      goBack();
+    } catch (err) {
+      console.error(err);
+      alert('Submission failed. Try again.');
+    }
+  });
 </script>
 
 </body>

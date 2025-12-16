@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Data. Your Rules.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif}
+    html,body{width:100%;min-height:100%}
+    body{
+      background:#050d1f;
+      background-image:radial-gradient(circle at top right,#0b2342 0%,#071326 45%,#030915 100%);
+      color:#cfeeff;overflow-x:hidden
+    }
+    .page{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:90px 20px;transition:.6s}
+    .hidden{opacity:0;transform:translateY(40px);pointer-events:none;position:absolute;inset:0}
+    .container{max-width:1100px;text-align:center}
+    .badge{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(0,160,220,.18);color:#66d6ff;font-size:13px;margin-bottom:26px}
+    h1{font-size:clamp(42px,6vw,74px);font-weight:800;line-height:1.1;margin-bottom:24px}
+    p.sub{max-width:720px;margin:0 auto 44px;font-size:18px;color:#b6d9ec;line-height:1.7}
+    .features{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+    .chip{padding:10px 18px;border-radius:999px;background:rgba(0,160,220,.12);font-size:14px;color:#7fdcff}
+    .cta{padding:16px 36px;border-radius:14px;border:none;background:linear-gradient(135deg,#00bfff,#0084ff);color:#e9f7ff;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 18px 40px rgba(0,132,255,.45)}
+    .stats{display:flex;justify-content:center;gap:90px;margin-top:90px;flex-wrap:wrap}
+    .stat h3{font-size:30px;color:#7ad9ff}
+    .stat span{font-size:14px;color:#9bbcd0}
+    .card{width:100%;max-width:500px;background:rgba(5,15,35,.78);backdrop-filter:blur(18px);border-radius:26px;padding:42px;box-shadow:0 30px 80px rgba(0,0,0,.65)}
+    label{font-size:14px;color:#9edcff}
+    input,select{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.35);color:#fff;margin:10px 0 26px}
+    .actions{display:flex;gap:14px}
+    .secondary{flex:1;padding:14px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#cfeeff;cursor:pointer}
+    .primary{flex:1;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;font-weight:600;cursor:pointer}
+    .bg-shapes::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(60deg,rgba(0,198,255,.12)0 1px,transparent 1px 120px),repeating-linear-gradient(-60deg,rgba(0,114,255,.1)0 1px,transparent 1px 120px);opacity:.55;z-index:-1}
+    .bg-shapes::after{content:'';position:fixed;inset:0;background-image:linear-gradient(90deg,rgba(255,255,255,.04)1px,transparent 1px),linear-gradient(rgba(255,255,255,.04)1px,transparent 1px);background-size:140px 140px;opacity:.22;z-index:-1}
+    .reveal{max-height:0;overflow:hidden;transform:translateY(-8px);transition:max-height .6s cubic-bezier(.22,.61,.36,1),opacity .4s,transform .4s;opacity:0}
+    .reveal.show{max-height:260px;opacity:1;transform:translateY(0)}
+    .doclink{color:#bfeaff;text-decoration:none;padding:8px 10px;border-radius:8px;font-size:15px}
+    .doclink:hover{background:rgba(0,160,220,.12)}
+    button:active{transform:scale(.97)}
+  </style>
+</head>
+<body class="bg-shapes">
+
+<section id="landing" class="page">
+  <div class="container">
+    <div class="badge">Decentralized Privacy Layer</div>
+    <h1>Your Data.<br>Your Rules.</h1>
+    <p class="sub">A third‑layer privacy protocol built on Zcash principles, extending zero‑knowledge security into programmable execution environments.</p>
+    <div class="features">
+      <div class="chip">Zero‑Knowledge Proofs</div>
+      <div class="chip">Shielded Execution</div>
+      <div class="chip">Selective Disclosure</div>
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <button class="cta" onclick="goToSurvey()">Join Early Access</button>
+      <button class="cta" onclick="openDocs()">Documentation</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><h3>10K+</h3><span>Early Users</span></div>
+      <div class="stat"><h3>zk</h3><span>Verified Privacy</span></div>
+      <div class="stat"><h3>L3</h3><span>Protocol Layer</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="docs" class="page hidden">
+  <div style="width:100%;max-width:1500px">
+    <article style="width:100%;background:rgba(5,15,35,.78);backdrop-filter:blur(18px);border-radius:30px;padding:70px;display:grid;grid-template-columns:280px 1fr;gap:64px">
+      <nav style="position:sticky;top:40px">
+        <h4 style="margin-bottom:22px;color:#7fdcff">Documentation</h4>
+        <a class="doclink" href="#features">Protocol Features</a>
+        <a class="doclink" href="#privacy">Privacy Protocol</a>
+        <a class="doclink" href="#addresses">Address Model</a>
+        <a class="doclink" href="#transactions">Transactions</a>
+        <a class="doclink" href="#viewing">Disclosure</a>
+        <a class="doclink" href="#supply">Economics</a>
+        <a class="doclink" href="#scaling">Scalability</a>
+      </nav>
+      <div>
+        <header style="margin-bottom:90px">
+          <span class="badge">Protocol Documentation</span>
+          <h2 style="font-size:46px;margin-top:18px">Architecture & Privacy</h2>
+          <p class="sub">This protocol extends Zcash‑grade cryptography into a modular third‑layer system, enabling confidential applications while inheriting base‑layer security.</p>
+        </header>
+        <section id="features" style="margin-bottom:70px"><h3>Protocol Features</h3><p>Designed as a privacy‑first execution layer, the protocol enforces confidentiality by default. Zero‑knowledge proofs validate correctness while keeping state, identities, and balances fully shielded.</p></section>
+        <section id="privacy" style="margin-bottom:70px"><h3>Privacy Protocol</h3><p>The Privacy Protocol governs identity abstraction, state commitments, and proof verification. All interactions are unlinkable unless explicitly disclosed.</p></section>
+        <section id="addresses" style="margin-bottom:70px"><h3>Address Model</h3><p>Shielded and transparent address compatibility allows seamless interoperability while maintaining strict privacy boundaries.</p></section>
+        <section id="transactions" style="margin-bottom:70px"><h3>Transactions</h3><p>Transactions execute privately with only cryptographic commitments finalized on‑chain.</p></section>
+        <section id="viewing" style="margin-bottom:70px"><h3>Selective Disclosure</h3><p>View‑key mechanisms allow users to grant audit access without surrendering control.</p></section>
+        <section id="supply" style="margin-bottom:70px"><h3>Economics</h3><p>Fixed supply economics combined with deterministic low‑fee execution.</p></section>
+        <section id="scaling" style="margin-bottom:90px"><h3>Scalability</h3><p>Recursive zk‑proof aggregation enables horizontal scalability without compromising security.</p></section>
+        <div class="actions"><button class="secondary" onclick="closeDocs()">Back</button><button class="primary" onclick="goToSurvey()">Join Early Access</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="survey" class="page hidden">
+  <div class="card">
+    <h2>Early Access Survey</h2>
+    <p class="sub">Submit your contact details to receive priority access.</p>
+    <form>
+      <label>Email</label><input type="email" required />
+      <label>Preferred Platform</label>
+      <select id="platform" onchange="handlePlatformChange()">
+        <option value="">Select</option><option>Telegram</option><option>Twitter</option><option>Discord</option><option>Email</option><option>Other</option>
+      </select>
+      <div id="handleBox" class="reveal"><label>Handle</label><input id="handle" /></div>
+      <div id="otherBox" class="reveal"><label>Platform</label><input id="otherPlatform" /><label>Handle</label><input id="otherHandle" /></div>
+      <div class="actions"><button type="button" class="secondary" onclick="goBack()">Back</button><button class="primary">Submit</button></div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const hideAll=()=>['landing','docs','survey'].forEach(id=>document.getElementById(id).classList.add('hidden'))
+  const goToSurvey=()=>{hideAll();survey.classList.remove('hidden');scrollTo({top:0,behavior:'smooth'})}
+  const goBack=()=>{hideAll();landing.classList.remove('hidden');scrollTo({top:0,behavior:'smooth'})}
+  const openDocs=()=>{hideAll();docs.classList.remove('hidden');scrollTo({top:0,behavior:'smooth'})}
+  const closeDocs=goBack
+  function handlePlatformChange(){handleBox.classList.remove('show');otherBox.classList.remove('show');platform.value==='Other'?otherBox.classList.add('show'):platform.value&&handleBox.classList.add('show')}
+  document.querySelector('form').addEventListener('submit',e=>{e.preventDefault();alert('Submitted');goBack()})
+</script>
+
+</body>
+</html>
